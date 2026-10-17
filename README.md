@@ -35,7 +35,7 @@ In [`layouts/partials/agentprose.html`](layouts/partials/agentprose.html):
         data-subscribe="https://www.linkedin.com/newsletters/agentic-engineering-in-action-6864516245006376960/" data-about="https://vibeprogrammer.github.io/agentprose-demo/about/" data-inspector></script>
 ```
 
-On a site served from its domain root, `<script src="/agentprose.min.js" defer></script>` is the whole thing. This demo lives under `/agentprose-demo/`, so it passes `data-base` and `data-index`; the other attributes add the newsletter link and the 🔌 inspector. The bundle is vendored in `static/js/` because agentprose isn't on npm yet; after the npm release the `src` becomes `https://cdn.jsdelivr.net/npm/agentprose@0.1/dist/agentprose.min.js`.
+On a site served from its domain root, `<script src="/agentprose.min.js" defer></script>` is the whole thing. This demo lives under `/agentprose-demo/`, so it passes `data-base` and `data-index`; the other attributes add the newsletter link and the 🔌 inspector. (`static/js/demo.js` is demo-site glue that makes the header button open the inspector; it is not part of agentprose.) The bundle is vendored in `static/js/` because agentprose isn't on npm yet; after the npm release the `src` becomes `https://cdn.jsdelivr.net/npm/agentprose@0.1/dist/agentprose.min.js`.
 
 Tools the page registers (all read-only): `get_current_article`, `search_posts`, `list_posts`, `get_post`, `get_table_of_contents`, `get_section`, `get_related_posts`, `list_taxonomies`, `get_site_info`, `get_citation`, `get_subscribe_link`.
 

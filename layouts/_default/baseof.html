@@ -5,7 +5,7 @@
 <div class="banner" role="note">Demo site for <a href="{{ site.Params.libraryRepo }}">{{ site.Params.library }}</a>. Content from Maxim Salnikov's newsletter <a href="{{ site.Params.newsletter }}"><em>Agentic Engineering in Action</em></a> (originals on LinkedIn). Not indexed by search engines.</div>
 <header class="site-header"><div class="wrap">
   <a class="brand" href="{{ "/" | relURL }}"><span class="mark" aria-hidden="true">◆</span> Agentic Engineering <span>in Action</span></a>
-  <nav>{{ range site.Menus.main }}<a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>{{ end }}<a class="try" href="?agentprose-inspect">Try the agent tools</a></nav>
+  <nav>{{ range site.Menus.main }}<a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>{{ end }}<a class="try" href="?agentprose-inspect" data-open-inspector>Try the agent tools</a></nav>
 </div></header>
 <main class="wrap">{{ block "main" . }}{{ end }}</main>
 <footer class="site-footer"><div class="wrap">
