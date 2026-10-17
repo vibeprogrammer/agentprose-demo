@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-head">
+    {{ if .Params.issue }}<p class="eyebrow">Issue {{ .Params.issue }} of <a href="{{ site.Params.newsletter }}">Agentic Engineering in Action</a></p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.original }}<p class="meta">By <strong>{{ .Params.author }}</strong>{{ if .Params.guest }} (guest post in Maxim Salnikov's newsletter){{ end }} · <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time> · {{ .ReadingTime }} min read</p>
+    <p class="source">Originally published on LinkedIn: <a href="{{ .Params.original }}">read the original ↗</a></p>{{ end }}
+    {{ with .Resources.GetMatch "cover.*" }}{{ $c := .Resize "1200x webp q78" }}<img class="cover" src="{{ $c.RelPermalink }}" width="{{ $c.Width }}" height="{{ $c.Height }}" alt="">{{ end }}
+  </header>
+  {{ if gt .WordCount 600 }}{{ with .TableOfContents }}{{ if gt (len .) 80 }}<details class="toc"><summary>Contents</summary>{{ . }}</details>{{ end }}{{ end }}{{ end }}
+  <div class="prose">{{ .Content }}</div>
+  {{ if .Params.original }}
+  <aside class="attribution">
+    <p>This article was written by <strong>{{ .Params.author }}</strong> and first published {{ .Date.Format "January 2, 2006" }} in the LinkedIn newsletter <a href="{{ site.Params.newsletter }}">Agentic Engineering in Action</a>. It is republished on this demo site unchanged. <a href="{{ .Params.original }}">Read and comment on the original</a>.</p>
+  </aside>
+  <p class="tags">{{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">#{{ .Data.Term }}</a>{{ end }}</p>
+  <nav class="pager">{{ with .NextInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}{{ with .PrevInSection }}<a class="next" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}</nav>
+  {{ end }}
+</article>
+{{ end }}

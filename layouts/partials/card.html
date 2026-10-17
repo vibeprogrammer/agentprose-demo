@@ -1,0 +1,9 @@
+<li class="card">
+  <a class="thumb" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">{{ with .Resources.GetMatch "cover.*" }}{{ $t := .Fill "640x336 webp q75 Center" }}<img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="" loading="lazy">{{ end }}</a>
+  <div class="card-body">
+    <p class="meta">Issue {{ .Params.issue }} · <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ if .Params.guest }} · guest post by {{ .Params.author }}{{ end }} · {{ .ReadingTime }} min read</p>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <p class="excerpt">{{ .Description }}</p>
+    <p class="tags">{{ range .GetTerms "tags" }}<a href="{{ .RelPermalink }}">#{{ .Data.Term }}</a>{{ end }}</p>
+  </div>
+</li>

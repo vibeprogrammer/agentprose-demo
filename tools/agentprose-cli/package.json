@@ -1,0 +1,9 @@
+{
+  "name": "agentprose-cli-vendored",
+  "private": true,
+  "type": "module",
+  "description": "Vendored copy of the agentprose CLI (dist/cli.js) until the package is on npm; then CI switches to `npx agentprose build`.",
+  "dependencies": {
+    "linkedom": "0.18.13"
+  }
+}

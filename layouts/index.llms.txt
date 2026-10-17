@@ -1,0 +1,14 @@
+# {{ site.Title }}
+
+> {{ site.Params.description }} This is a demo copy; the originals live on LinkedIn.
+
+Author: Maxim Salnikov ({{ site.Params.authorUrl }}). Newsletter: {{ site.Params.newsletter }}
+
+## Posts
+{{ range (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description }} (by {{ .Params.author }}, {{ .Date.Format "2006-01-02" }}; original: {{ .Params.original }})
+{{- end }}
+
+## Optional
+- [About this demo]({{ "about/" | absURL }})
+- [RSS feed]({{ "index.xml" | absURL }})

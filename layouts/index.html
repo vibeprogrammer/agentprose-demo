@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="hero">
+  <p class="eyebrow">A newsletter by Maxim Salnikov · demo copy</p>
+  <h1>Agentic Engineering in Action</h1>
+  <p class="lede">Hands-on notes on building software with AI agents: harnesses, evaluation, CI gates, context supply chains and WebMCP. {{ len (where site.RegularPages "Section" "posts") }} issues, republished here to show how <a href="{{ site.Params.libraryRepo }}">{{ site.Params.library }}</a> lets AI agents read a blog through WebMCP.</p>
+  <p class="cta"><a class="button" href="?agentprose-inspect">Try the agent tools</a><a class="ghost" href="{{ site.Params.newsletter }}">Subscribe on LinkedIn ↗</a></p>
+</section>
+<ul class="post-list">
+{{ range (where site.RegularPages "Section" "posts").ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}
+</ul>
+{{ end }}

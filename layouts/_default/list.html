@@ -1,0 +1,4 @@
+{{ define "main" }}
+<section class="hero small"><p class="eyebrow">{{ with .Data.Singular }}{{ . | title }}{{ else }}Archive{{ end }}</p><h1>{{ if eq .Kind "term" }}#{{ .Data.Term }}{{ else }}{{ .Title }}{{ end }}</h1></section>
+<ul class="post-list">{{ range .Pages.ByDate.Reverse }}{{ partial "card.html" . }}{{ end }}</ul>
+{{ end }}

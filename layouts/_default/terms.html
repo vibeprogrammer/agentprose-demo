@@ -1,0 +1,4 @@
+{{ define "main" }}
+<section class="hero small"><p class="eyebrow">Browse</p><h1>Tags</h1></section>
+<ul class="term-cloud">{{ range .Data.Terms.ByCount }}<li><a href="{{ .Page.RelPermalink }}">#{{ .Page.Data.Term }} <span>{{ .Count }}</span></a></li>{{ end }}</ul>
+{{ end }}

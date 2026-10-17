@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+{{- $title := cond .IsHome site.Title (printf "%s · %s" .Title "Agentic Engineering in Action") }}
+<title>{{ $title }}</title>
+{{- $desc := cond .IsHome site.Params.description (.Description | default .Summary | plainify) }}
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta property="og:site_name" content="Agentic Engineering in Action (demo)">
+<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="en_US">
+{{- if and .IsPage (eq .Section "posts") }}
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:author" content="{{ .Params.author }}">
+{{- range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
+{{- with .Resources.GetMatch "cover.*" }}<meta property="og:image" content="{{ .Permalink }}"><meta name="twitter:card" content="summary_large_image">{{ end }}
+{{ partial "jsonld.html" . }}
+{{- else }}
+<meta property="og:type" content="website">
+{{- end }}
+{{ range .AlternativeOutputFormats -}}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">{{ end }}
+{{- if not .IsHome }}<link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | absURL }}" title="{{ site.Title }}">{{ end }}
+<link rel="sitemap" type="application/xml" href="{{ "sitemap.xml" | absURL }}">
+{{ $css := resources.Get "css/site.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◆</text></svg>">
+{{ partial "agentprose.html" . }}
