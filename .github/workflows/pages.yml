@@ -42,11 +42,9 @@ jobs:
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       # agentprose static index: metadata + full Markdown per post, read by the one-line script.
-      # Uses the vendored CLI until agentprose is on npm; then: npx agentprose build public ...
+      # Same version as the vendored bundle in static/js/ (keep the two in step).
       - name: Build agentprose index
-        run: |
-          npm ci --prefix tools/agentprose-cli --no-audit --no-fund
-          node tools/agentprose-cli/cli.js build public --base-url "${{ steps.pages.outputs.base_url }}/" --include '^/posts/'
+        run: npx --yes agentprose@0.1.6 build public --base-url "${{ steps.pages.outputs.base_url }}/" --include '^/posts/'
 
       - name: Check search-engine blocking
         run: |

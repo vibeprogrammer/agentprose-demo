@@ -2,7 +2,7 @@
 
 **Live:** https://vibeprogrammer.github.io/agentprose-demo/
 
-A small Hugo blog that shows [agentprose](https://github.com/vibeprogrammer/agentprose) at work: AI agents in a WebMCP-capable browser can read, search and cite the posts through tools, with one `<script>` line added to the theme.
+A small Hugo blog that shows [agentprose](https://github.com/webmaxru/agentprose) at work: AI agents in a WebMCP-capable browser can read, search and cite the posts through tools, with one `<script>` line added to the theme.
 
 > **Demo only, not for search engines.** `robots.txt` disallows all crawlers and every page has `<meta name="robots" content="noindex, nofollow">`. The CI build fails if any page is missing it.
 
@@ -35,7 +35,7 @@ In [`layouts/partials/agentprose.html`](layouts/partials/agentprose.html):
         data-subscribe="https://www.linkedin.com/newsletters/agentic-engineering-in-action-6864516245006376960/" data-about="https://vibeprogrammer.github.io/agentprose-demo/about/" data-inspector></script>
 ```
 
-On a site served from its domain root, `<script src="/agentprose.min.js" defer></script>` is the whole thing. This demo lives under `/agentprose-demo/`, so it passes `data-base` and `data-index`; the other attributes add the newsletter link and the 🔌 inspector. (`static/js/demo.js` is demo-site glue that makes the header button open the inspector; it is not part of agentprose.) The bundle is vendored in `static/js/` because agentprose isn't on npm yet; after the npm release the `src` becomes `https://cdn.jsdelivr.net/npm/agentprose@0.1/dist/agentprose.min.js`.
+On a site served from its domain root, `<script src="/agentprose.min.js" defer></script>` is the whole thing. This demo lives under `/agentprose-demo/`, so it passes `data-base` and `data-index`; the other attributes add the newsletter link and the 🔌 inspector. (`static/js/demo.js` is demo-site glue that makes the header button open the inspector; it is not part of agentprose.) The bundle is a self-hosted copy of agentprose **0.1.6** from npm in `static/js/` (`agentprose.min.js`, the lazy engine `agentprose.index.min.js`, the inspector `agentprose.inspector.min.js`, and their source maps). To update it, copy those files from the new version's `dist/` and change the version in `.github/workflows/pages.yml` to match. Loading it from jsDelivr instead is one `src` change: `https://cdn.jsdelivr.net/npm/agentprose@0/dist/agentprose.min.js`.
 
 Tools the page registers (all read-only): `get_current_article`, `search_posts`, `list_posts`, `get_post`, `get_table_of_contents`, `get_section`, `get_related_posts`, `list_taxonomies`, `get_site_info`, `get_citation`, `get_subscribe_link`.
 
@@ -48,8 +48,7 @@ Tools the page registers (all read-only): `get_current_article`, `search_posts`,
 
 ```bash
 hugo --gc --minify
-npm ci --prefix tools/agentprose-cli
-node tools/agentprose-cli/cli.js build public --base-url https://vibeprogrammer.github.io/agentprose-demo/ --include '^/posts/'
+npx agentprose@0.1.6 build public --base-url https://vibeprogrammer.github.io/agentprose-demo/ --include '^/posts/'
 ```
 
 The second step writes `agentprose.json` and one Markdown file per post, so `search_posts` and `get_post` cover the whole archive from any page. [`.github/workflows/pages.yml`](.github/workflows/pages.yml) runs the same steps (Hugo 0.168.0 extended) and deploys to GitHub Pages.
