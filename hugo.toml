@@ -11,7 +11,7 @@ summaryLength = 40
   authorUrl = "https://www.linkedin.com/in/webmax/"
   newsletter = "https://www.linkedin.com/newsletters/agentic-engineering-in-action-6864516245006376960/"
   library = "agentprose"
-  libraryRepo = "https://github.com/vibeprogrammer/agentprose"
+  libraryRepo = "https://github.com/webmaxru/agentprose"
   demoRepo = "https://github.com/vibeprogrammer/agentprose-demo"
 
 [taxonomies]
